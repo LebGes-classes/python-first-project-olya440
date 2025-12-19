@@ -20,9 +20,9 @@ from direction import (
     Direction,
 )
 
-MOVE_DELAY_INITIAL = 0.3    # Константа задержки движения
-MOVE_DELAY_DECREMENT = 0.05 # Константа задержки движения
-MIN_MOVE_DELAY = 0.1        # Константа задержки движения
+MOVE_DELAY_INITIAL = 0.3    
+MOVE_DELAY_DECREMENT = 0.05 
+MIN_MOVE_DELAY = 0.1        
 
 class Game:
     """Управляет основной логикой игры."""
@@ -44,22 +44,22 @@ class Game:
     def draw(self):
         """Отрисовывает игровое поле в консоли."""
 
-        field = [[' ' for _ in range(self.width)] for _ in range(self.height)] # Создаём пустое поле
+        field = [[' ' for _ in range(self.width)] for _ in range(self.height)] # создаём пустое поле
 
-        for segment in self.snake.body[1:]: # Рисуем тело змейки
+        for segment in self.snake.body[1:]: # рисуем тело змейки
             if 0 <= segment.x < self.width and 0 <= segment.y < self.height:
                 field[segment.y][segment.x] = '█'
 
-        head = self.snake.head() # Рисуем голову
+        head = self.snake.head() # рисуем голову
         if 0 <= head.x < self.width and 0 <= head.y < self.height:
             field[head.y][head.x] = '■'
 
-        if 0 <= self.food.position.x < self.width and 0 <= self.food.position.y < self.height: # Рисуем яблочки (это я запомнила, что Вы сказали, что она их ест)
+        if 0 <= self.food.position.x < self.width and 0 <= self.food.position.y < self.height: # рисуем яблочки (это я запомнила, что Вы сказали, что она их ест)
             field[self.food.position.y][self.food.position.x] = '●'
 
-        os.system('cls' if os.name == 'nt' else 'clear') # Очистка консоли
+        os.system('cls' if os.name == 'nt' else 'clear') # очистка консоли
 
-        print('┌' + '─' * self.width + '┐') # Вывод
+        print('┌' + '─' * self.width + '┐') # вывод
         for row in field:
             print('│' + ''.join(row) + '│')
         print('└' + '─' * self.width + '┘')
@@ -68,25 +68,25 @@ class Game:
     def handle_input(self):
         """Обрабатывает нажатия клавиш пользователя."""
 
-        if msvcrt.kbhit():
-            key = msvcrt.getch()
+        if msvcrt.kbhit(): # есть ли нажатие?
+            key = msvcrt.getch() 
             if key in (b'\x00', b'\xe0'):
                 key = msvcrt.getch()
-                if key == Controls.UP.key:      # Верхняя стрелка
+                if key == Controls.UP.key:      # верхняя стрелка
                     self.snake.change_direction(Direction.UP)
-                elif key == Controls.DOWN.key:    # Нижняя стрелка
+                elif key == Controls.DOWN.key:    # нижняя стрелка
                     self.snake.change_direction(Direction.DOWN)
-                elif key == Controls.LEFT.key:    # Левая стрелка
+                elif key == Controls.LEFT.key:    # левая стрелка
                     self.snake.change_direction(Direction.LEFT)
-                elif key == Controls.RIGHT.key:    # Правая стрелка
+                elif key == Controls.RIGHT.key:    # правая стрелка
                     self.snake.change_direction(Direction.RIGHT)
-            elif key == Controls.QUIT.key:        # Выход
+            elif key == Controls.QUIT.key:        # выход
                 self.state = GameCommands.MENU
 
     def update(self):
         """Обновляет состояние игры: движение, проверка столкновений, рост."""
 
-        self.snake.move()
+        self.snake.move() # змейка делает один шаг вперёд
 
         if self.snake.check_collision(self.width, self.height):
             self.state = GameCommands.OVER
@@ -138,4 +138,5 @@ class Game:
                 print("Нажмите любую клавишу для возврата в меню...")
                 time.sleep(1)
                 msvcrt.getch()
+
                 self.state = GameCommands.MENU
