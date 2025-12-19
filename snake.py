@@ -20,7 +20,7 @@ class Snake:
             Point(start_pos.x - 2, start_pos.y)
         ]
         self.direction = Direction.RIGHT  # изначально движется вправо
-        self.move_delay = 0.3  # Используется константа из game.py, но значение вставлено напрямую
+        self.move_delay = 0.3  # используется константа из game.py, но значение вставлено напрямую
 
     def move(self):
         """Перемещает змейку на одну клетку в текущем направлении."""
@@ -32,8 +32,8 @@ class Snake:
         self.body.pop()  # удаляем последний элемент (хвост)
 
     def grow(self):
-
         """Увеличивает длину змейки, добавляя копию хвоста."""
+        
         self.body.append(Point(self.body[-1].x, self.body[-1].y))
 
     def change_direction(self, direction):
@@ -42,6 +42,7 @@ class Snake:
         Args:
             direction (Direction): Новое направление движения.
         """
+        
         if direction == self.direction:
 
             return
@@ -74,12 +75,13 @@ class Snake:
 
         head = self.head()
         
-        if head.x < 0 or head.x >= width or head.y < 0 or head.y >= height:
+        if head.x < 0 or head.x >= width or head.y < 0 or head.y >= height: # столкновение со стеной
 
             return True
 
-        if head in self.body[1:]:
+        if head in self.body[1:]: # столкновение с собой
 
             return True
+
 
         return False
