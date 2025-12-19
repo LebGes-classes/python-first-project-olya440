@@ -19,7 +19,7 @@ class Menu:
         """
 
         self.options = [("start", GameCommands.RUN), ("rules", GameCommands.SHOW_RULES), ("quit", GameCommands.QUIT)]
-        self.selected = 0
+        self.selected = 0 # изначально выбран первый пункт ("start")
         self.width = width
         self.height = height
 
@@ -33,37 +33,37 @@ class Menu:
 
         self.clear()
 
-        menu_lines = []
+        menu_lines = []  # подготовка строк меню
         for i, option in enumerate(self.options):
             text = option[0]
             if i == self.selected:
-                menu_lines.append(f"[ {text} ]")
+                menu_lines.append(f"[ {text} ]") # выделенный пункт в скобках
             else:
-                menu_lines.append(f"  {text}  ")
+                menu_lines.append(f"  {text}  ") # обычный пункт 
 
-        title = "SNAKE"
+        title = "SNAKE" # расчёт вертикального центрирования
 
-        content_height = 1 + len(menu_lines)   # Заголовок + опции
+        content_height = 1 + len(menu_lines)   # заголовок + опции
         top_padding = (self.height - content_height) // 2
 
-        print("┌" + "─" * self.width + "┐") # Верхняя рамка
+        print("┌" + "─" * self.width + "┐") # верхняя рамка
 
-        for row in range(self.height): # Внутренняя область
+        for row in range(self.height): # внутренняя область
             line = ""
 
-            if row == top_padding:  # Строка с заголовком
+            if row == top_padding:  # строка с заголовком
                 line = title.center(self.width)
 
-            elif top_padding < row <= top_padding + len(menu_lines): # Опции меню
+            elif top_padding < row <= top_padding + len(menu_lines): # опции меню
                 menu_index = row - top_padding - 1
                 line = menu_lines[menu_index].center(self.width)
 
-            else: # Пустое пространство
-                line = " " * self.width
+            else: 
+                line = " " * self.width # пустое пространство
 
             print("│" + line + "│")
 
-        print("└" + "─" * self.width + "┘") # Нижняя рамка
+        print("└" + "─" * self.width + "┘") # нижняя рамка
 
     def handle_input(self):
         """Обрабатывает ввод пользователя и обновляет состояние меню.
@@ -72,22 +72,22 @@ class Menu:
             GameCommands or None: Выбранная команда или None, если выбор не сделан.
         """
 
-        key = msvcrt.getch()
+        key = msvcrt.getch() #возвращает байт, соответствующий нажатой клавише, без Enter
 
-        if key in (b"\x00", b"\xe0"): # Обработка специальных клавиш (стрелки)
+        if key in (b"\x00", b"\xe0"): # обработка специальных клавиш (стрелки)
             key = msvcrt.getch()
 
             if key == Controls.UP.key:
-                self.selected = (self.selected - 1) % len(self.options)
+                self.selected = (self.selected - 1) % len(self.options) # позволяет переходить с первого пункта на последний при движении вверх
             elif key == Controls.DOWN.key:
-                self.selected = (self.selected + 1) % len(self.options)
+                self.selected = (self.selected + 1) % len(self.options) # позволяет переходить с последнего пункта на первый при движении вниз
 
-        elif key == b"\r":
+        elif key == b"\r": # код клавиши Enter
             return self.options[self.selected][1]
 
         return None
 
-    def show(self):
+    def show(self): # бесконечно рисует меню и ждёт ввода
         """Отображает меню и обрабатывает ввод до выбора опции.
 
         Returns:
@@ -114,4 +114,5 @@ class Menu:
             'Нажмите любую клавишу, чтобы вернуться в меню.\n'
         )
 
-        msvcrt.getch()
+
+        msvcrt.getch() # ожидание нажатия любой клавиши
