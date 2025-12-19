@@ -17,7 +17,7 @@ class Direction(Enum):
     RIGHT = (1, 0)  # x увеличивается → вправо
 
     @property
-    def delta(self):
+    def delta(self): #приращение координат при движении в этом направлении.
         """Возвращает (dx, dy) как кортеж.
 
         Returns:
@@ -46,4 +46,5 @@ class Direction(Enum):
             return Direction.RIGHT
 
         return Direction.LEFT
+
 
