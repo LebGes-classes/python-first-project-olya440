@@ -7,6 +7,7 @@ from game_commands import (
     GameCommands,
 )
 
+
 class Menu:
     """Предоставляет пользовательское меню."""
 
