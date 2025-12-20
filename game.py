@@ -20,6 +20,7 @@ from direction import (
     Direction,
 )
 
+
 MOVE_DELAY_INITIAL = 0.3    
 MOVE_DELAY_DECREMENT = 0.05 
 MIN_MOVE_DELAY = 0.1        
