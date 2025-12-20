@@ -5,6 +5,7 @@ from direction import (
     Direction,
 )
 
+
 class Snake:
     """Змейка: список точек (тело), голова — первый элемент."""
 
