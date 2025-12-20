@@ -3,6 +3,7 @@ from points import (
     Point,
 )
 
+
 class Food:
     """Еда — одна точка на поле."""
 
@@ -45,4 +46,6 @@ class Food:
             snake_body (list[Point]): Текущее тело змейки.
         """
 
+
         self.position = self._generate_position(width, height, snake_body)
+        
