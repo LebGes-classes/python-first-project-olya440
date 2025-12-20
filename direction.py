@@ -46,5 +46,3 @@ class Direction(Enum):
             return Direction.RIGHT
 
         return Direction.LEFT
-
-
