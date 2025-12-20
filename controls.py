@@ -1,4 +1,4 @@
-from enum import Enum #специальный модуль для создания именованных констант
+from enum import Enum # специальный модуль для создания именованных констант
 
 
 class Controls(Enum):
@@ -18,7 +18,7 @@ class Controls(Enum):
     RIGHT = b'M'
     QUIT = b'q'
 
-    @property #превращает метод в атрибут 
+    @property # превращает метод в атрибут 
     def key(self):
         """Возвращает байтовое значение клавиши.
 
@@ -28,3 +28,4 @@ class Controls(Enum):
 
 
         return self.value
+
