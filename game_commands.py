@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class GameCommands(Enum):
     """Перечисление команд для управления состоянием игры.
 
@@ -16,3 +17,4 @@ class GameCommands(Enum):
     OVER = 2
     SHOW_RULES = 3
     QUIT = 4
+    
